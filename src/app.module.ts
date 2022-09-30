@@ -7,7 +7,6 @@ import { CafeModule } from './cafe/cafe.module';
 import { TiendaEntity } from './tienda/tienda.entity';
 import { TiendaModule } from './tienda/tienda.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { TiendaCafeController } from './tienda-cafe/tienda-cafe.controller';
 
 @Module({
   imports: [TiendaModule, CafeModule,
@@ -17,15 +16,16 @@ import { TiendaCafeController } from './tienda-cafe/tienda-cafe.controller';
       port: 5432,
       username: 'postgres',
       password: 'postgres',
-      database: 'museum',
+      database: 'cafe',
       entities: [CafeEntity, TiendaEntity],
       dropSchema: true,
       synchronize: true,
       keepConnectionAlive: true
+
     }),
     //MuseumArtworkModule,
   ],
-  controllers: [AppController, TiendaCafeController],
+  controllers: [AppController],
   providers: [AppService],
 })
 export class AppModule {}
