@@ -1,12 +1,31 @@
+/* eslint-disable prettier/prettier */
 import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
+import { CafeEntity } from './cafe/cafe.entity';
 import { CafeModule } from './cafe/cafe.module';
+import { TiendaEntity } from './tienda/tienda.entity';
 import { TiendaModule } from './tienda/tienda.module';
+import { TypeOrmModule } from '@nestjs/typeorm';
+import { TiendaCafeController } from './tienda-cafe/tienda-cafe.controller';
 
 @Module({
-  imports: [CafeModule, TiendaModule],
-  controllers: [AppController],
+  imports: [TiendaModule, CafeModule,
+    TypeOrmModule.forRoot({
+      type: 'postgres',
+      host: 'localhost',
+      port: 5432,
+      username: 'postgres',
+      password: 'postgres',
+      database: 'museum',
+      entities: [CafeEntity, TiendaEntity],
+      dropSchema: true,
+      synchronize: true,
+      keepConnectionAlive: true
+    }),
+    //MuseumArtworkModule,
+  ],
+  controllers: [AppController, TiendaCafeController],
   providers: [AppService],
 })
 export class AppModule {}
