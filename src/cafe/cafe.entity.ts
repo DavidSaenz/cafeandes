@@ -1,6 +1,7 @@
 /* eslint-disable prettier/prettier */
 
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { TiendaEntity } from "../tienda/tienda.entity";
+import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity()
 export class CafeEntity {
@@ -16,5 +17,7 @@ export class CafeEntity {
     @Column()
     precio: number;
 
+    @ManyToOne(() => TiendaEntity, tienda => tienda.cafes)
+    tienda: TiendaEntity;
 }
 

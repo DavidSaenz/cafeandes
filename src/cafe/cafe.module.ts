@@ -1,4 +1,11 @@
 import { Module } from '@nestjs/common';
+import { CafeService } from './cafe.service';
+import { TypeOrmModule } from '@nestjs/typeorm';
+import { CafeEntity } from './cafe.entity';
 
-@Module({})
+@Module({
+  imports: [TypeOrmModule.forFeature([CafeEntity])],
+  providers: [CafeService],
+  //controllers: [CafeController],
+})
 export class CafeModule {}
